@@ -1,0 +1,33 @@
+name: build and push
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: build
+        id: build-expo
+        uses: nzws/turtle-action@master
+        with:
+          build-os: 'android'
+          expo-sdk-version: '42.0.0'
+        env:
+          EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
+          EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
+          EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.KEYSTORE }}
+          EXPO_ANDROID_KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      - name: Upload asset
+          uses: actions/upload-artifact@v1
+          with:
+            name: asset
+            path: ${{ steps.build-expo.outputs.asset-path }}
