@@ -17,7 +17,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '8'
-          cache: 'gradle'
       - run: rm package-lock.json yarn.lock
       - run: yarn install
       - uses: actions/cache@v2
