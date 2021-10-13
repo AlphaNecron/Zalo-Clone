@@ -45,11 +45,13 @@ jobs:
         with:
           name: artifact
           path: ${{ steps.build-expo.outputs.asset-path }}
+      - id: shorten_sha
+        run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
       - name: upload release
         uses: ncipollo/release-action@v1.8.10
         with:
           prerelease: 'true'
-          commit: ${SHA::7}
+          commit: ${{ steps.shorten_sha.outputs.sha7 }}
           tag: 'v1.0.0'
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
           token: ${{ secrets.GITHUB_TOKEN }}
