@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '8'
       - run: rm package-lock.json yarn.lock
       - run: yarn install
       - name: build
