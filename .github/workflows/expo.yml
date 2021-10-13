@@ -33,8 +33,14 @@ jobs:
           EXPO_ANDROID_KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-      - name: Upload asset
-        uses: actions/upload-artifact@v1
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: asset
+          name: zalo_clone_artifact.apk
           path: ${{ steps.build-expo.outputs.asset-path }}
+      - name: upload release
+        uses: ncipollo/release-action@v1.8.10
+        with:
+          prerelease: true
+          artifacts: ${{ steps.build-expo.outputs.asset-path }}
+          token: ${{ secrets.GITHUB_TOKEN }}
