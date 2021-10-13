@@ -1,4 +1,4 @@
-name: build and upload
+name: build
 on:
   push:
     branches:
@@ -50,6 +50,7 @@ jobs:
         with:
           prerelease: 'true'
           commit: ${SHA::7}
+          tag: ${{ github.ref }}
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
