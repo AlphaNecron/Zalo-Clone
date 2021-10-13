@@ -36,11 +36,12 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: zalo_clone_artifact.apk
+          name: artifact
           path: ${{ steps.build-expo.outputs.asset-path }}
       - name: upload release
         uses: ncipollo/release-action@v1.8.10
         with:
           prerelease: true
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
+          commit: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
