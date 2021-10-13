@@ -49,5 +49,5 @@ jobs:
         with:
           prerelease: true
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
-          commit: 'dev'
+          commit: ${{ github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
