@@ -27,7 +27,7 @@ jobs:
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       - name: Upload asset
-          uses: actions/upload-artifact@v1
-          with:
-            name: asset
-            path: ${{ steps.build-expo.outputs.asset-path }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: asset
+          path: ${{ steps.build-expo.outputs.asset-path }}
