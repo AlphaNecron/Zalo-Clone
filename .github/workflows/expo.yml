@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
@@ -46,9 +48,9 @@ jobs:
       - name: upload release
         uses: ncipollo/release-action@v1.8.10
         with:
-          prerelease: true
+          prerelease: 'true'
+          commit: ${SHA::7}
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
-          tag: v1.0.0-${SHA::7}
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           SHA: ${{ github.sha }}
