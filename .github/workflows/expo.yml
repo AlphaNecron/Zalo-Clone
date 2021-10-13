@@ -51,7 +51,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           prerelease: "true"
-          tag: "v1.0.0-${{ steps.shorten_sha.outputs.sha7 }}"
+          tag: "v1.0.${{ steps.shorten_sha.outputs.sha7 }}"
           commit: ${{ steps.shorten_sha.outputs.sha7 }}
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
           token: ${{ secrets.GITHUB_TOKEN }}
