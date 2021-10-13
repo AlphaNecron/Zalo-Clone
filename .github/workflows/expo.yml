@@ -50,7 +50,7 @@ jobs:
         with:
           prerelease: 'true'
           commit: ${SHA::7}
-          tag: ${{ github.ref }}
+          tag: 'v1.0.0'
           artifacts: ${{ steps.build-expo.outputs.asset-path }}
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
